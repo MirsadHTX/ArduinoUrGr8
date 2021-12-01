@@ -50,8 +50,6 @@ void clocking(DS1307 ur, rgb_lcd lcdobj, bool clearing)
   lcdobj.print(ur.month);
   lcdobj.print("/");
   lcdobj.print(ur.year);
-  lcdobj.setCursor(12,1);
-  lcdobj.print(dayofweek[ur.dayOfWeek-1]);
   delay(20); // Add small delay for no flicking screen effect
     if(clearing)
   {
