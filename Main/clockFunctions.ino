@@ -1,3 +1,4 @@
+String dayofweek[7]= {"Man", "Tir", "Ond", "Tor", "Fre", "Loer", "Soen"};
 void clockSetup(DS1307 ur)  // Parameter object of clock
 {
   ur.begin(); // Starts the clock 
@@ -43,6 +44,14 @@ void clocking(DS1307 ur, rgb_lcd lcdobj, bool clearing)
   {
     lcdobj.print(ur.second);
   }
+  lcdobj.setCursor(0,1);
+  lcdobj.print(ur.dayOfMonth);
+  lcdobj.print("/");
+  lcdobj.print(ur.month);
+  lcdobj.print("/");
+  lcdobj.print(ur.year);
+  lcdobj.setCursor(12,1);
+  lcdobj.print(dayofweek[ur.dayOfWeek-1]);
   delay(20); // Add small delay for no flicking screen effect
     if(clearing)
   {
