@@ -20,11 +20,16 @@ void navsetup()
 int navigation(){
   //detect variation in rotation on the x axis
   acc.getAcceleration(&x, &y, &z);
+  lcd.setCursor(0, 0);
+  lcd.print(" STP   ELV   UR");
   if(y > 0.7){
     nav = 1;
   }
   else if(y < -0.7){
     nav = 2;
+  }  //detect if user wants to go back to the  main menu
+  else if(x > 0.7){
+    return 3;
   }
   else{
     nav = 0;
@@ -40,6 +45,7 @@ int navigation(){
     spot += -1;
     lcd.clear();
     lcd.print(" STP   ELV   UR");    
+
   }
   if(spot > 15){
     spot = 0;
@@ -54,13 +60,16 @@ int navigation(){
   lcd.setCursor(spot, 1);
   lcd.write((unsigned char)1);
 
-  if (spot == 2 && digitalRead(8) == HIGH || spot == 3 && digitalRead(8) == HIGH || spot == 1 && digitalRead(8) == HIGH){
+  if (spot == 2 && digitalRead(8) == HIGH || spot == 3 && digitalRead(8) == HIGH || spot == 1 && digitalRead(8) == HIGH)
+  {
     return(0);
   }
-  if (spot == 7 && digitalRead(8) == HIGH || spot == 8 && digitalRead(8) == HIGH || spot == 9 && digitalRead(8) == HIGH){
+  if (spot == 7 && digitalRead(8) == HIGH || spot == 8 && digitalRead(8) == HIGH || spot == 9 && digitalRead(8) == HIGH)
+  {
     return(1);
   }
-  if (spot == 13 && digitalRead(8) == HIGH || spot == 14 && digitalRead(8) == HIGH){
+  if (spot == 13 && digitalRead(8) == HIGH || spot == 14 && digitalRead(8) == HIGH)
+  {
     return(2);
   }
   delay(100);

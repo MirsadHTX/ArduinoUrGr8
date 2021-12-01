@@ -3,14 +3,15 @@
 #include <rgb_lcd.h>
 #include <MMA7660.h>
 
+rgb_lcd lcd;
+DS1307 ur;
 MMA7660 acc;
 int currentState;
 bool runNav = true;
-rgb_lcd lcd;
-DS1307 ur;
 
 void setup() 
 {
+  //setup klasser 
   acc.init();
   lcd.begin(16,2);
   clockSetup(ur);
@@ -21,22 +22,21 @@ void setup()
 
 void loop() 
 {
-  if(runNav == true){
-  currentState = navigation();
-  delay(100);
+  //går ind på menu
+  if(runNav == true)
+  {
+    currentState = navigation();
+    delay(100);
   }
-  /*
-  counterLoop(8, lcd, 0, 1);
-  lcd.setCursor(0,0);
-  clocking(ur, lcd, true);
-*/
   if(currentState == 2)
   {
-    clocking(ur, lcd, true);
+    lcd.clear();
+    clocking(ur, lcd, false);
     runNav = false;
-    }
+  }
   else if(currentState == 0)
   {
+    lcd.clear();
     counterLoop(8, lcd, 0, 1);
     runNav = false;
   }
@@ -48,4 +48,9 @@ void loop()
   else{
     currentState = 3;
   }
+  if(ToMenu() == true && currentState != 3){
+    lcd.clear();
+    runNav = true;
+  }
+  delay(50);
 }

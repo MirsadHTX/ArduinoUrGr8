@@ -1,4 +1,4 @@
-String dayofweek[7]= {"Man", "Tir", "Ond", "Tor", "Fre", "Loer", "Soen"};
+String dayofweek[7]= {"Mand", "Tirs", "Onds", "Tors", "Fred", "Loer", "Soen"};
 void clockSetup(DS1307 ur)  // Parameter object of clock
 {
   ur.begin(); // Starts the clock 
@@ -15,6 +15,7 @@ void clockDateSetup(DS1307 ur, int y, int m, int d, int h, int mi, int s) // Par
 void clocking(DS1307 ur, rgb_lcd lcdobj, bool clearing) 
 {
   ur.getTime(); // Get the time from RTC module
+  lcd.setCursor(0,0);
   if(ur.hour < 10)  //Hours, minutes and seconds display on lcd screen, if statement for under 10 to add a zero
   {
     lcdobj.print("0");
@@ -44,13 +45,15 @@ void clocking(DS1307 ur, rgb_lcd lcdobj, bool clearing)
   {
     lcdobj.print(ur.second);
   }
-  lcdobj.setCursor(0,1);
+  lcdobj.setCursor(0,1); // Writes on next line date
   lcdobj.print(ur.dayOfMonth);
   lcdobj.print("/");
   lcdobj.print(ur.month);
   lcdobj.print("/");
   lcdobj.print(ur.year);
-  delay(20); // Add small delay for no flicking screen effect
+  lcdobj.setCursor(12,1); // Further on next line, day
+  lcdobj.print(dayofweek[ur.dayOfWeek-1]);
+  delay(100); // Add small delay for no flicking screen effect
     if(clearing)
   {
    lcdobj.clear();  // Clears display 
