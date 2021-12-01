@@ -17,9 +17,6 @@ void setup()
   counterSetup(8);
   navsetup();
   lcd.clear();
-  ur.fillDayOfWeek(3);
-
-  
 }
 
 void loop() 
