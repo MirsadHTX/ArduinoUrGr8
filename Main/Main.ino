@@ -11,7 +11,7 @@ bool runNav = true;
 
 void setup() 
 {
-  //setup klasser 
+  //setup classes
   acc.init();
   lcd.begin(16,2);
   clockSetup(ur);
@@ -22,16 +22,17 @@ void setup()
 
 void loop() 
 {
-  //går ind på menu
+  //opens navigation menu
   if(runNav == true)
   {
     currentState = navigation();
     delay(100);
   }
+  //opens function if arrow is under funciton name and button is pressed
   if(currentState == 2)
   {
     lcd.clear();
-    clocking(ur, lcd, false);
+    clocking(ur, lcd);
     runNav = false;
   }
   else if(currentState == 0)
@@ -48,6 +49,7 @@ void loop()
   else{
     currentState = 3;
   }
+  //returns to menu if accelerometors x axis is changed drastically
   if(ToMenu() == true && currentState != 3){
     lcd.clear();
     runNav = true;

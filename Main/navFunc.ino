@@ -27,7 +27,9 @@ int navigation(){
   }
   else if(y < -0.7){
     nav = 2;
-  }  //detect if user wants to go back to the  main menu
+  }  
+  
+  //detect if user wants to go back to the  main menu
   else if(x > 0.7){
     return 3;
   }
@@ -35,18 +37,20 @@ int navigation(){
     nav = 0;
   }
   
-  //move arrow when accelerator is moved
+  //movex arrow to the right when accelerometor is moved
   if(nav == 1){
     spot += 1;
     lcd.clear();
     lcd.print(" STP   ELV   UR");    
   }
+  //moves arrow to the left when accelerometor is moved
   if(nav == 2){
     spot += -1;
     lcd.clear();
     lcd.print(" STP   ELV   UR");    
-
   }
+  
+  //prevents arrow from going off screen
   if(spot > 15){
     spot = 0;
     lcd.clear();
@@ -57,9 +61,12 @@ int navigation(){
     lcd.clear();
     lcd.print(" STP   ELV   UR");    
   }
+  
+  //determines arrows position and writes it
   lcd.setCursor(spot, 1);
   lcd.write((unsigned char)1);
 
+  //detects if button is pressed while arrow is under a program
   if (spot == 2 && digitalRead(8) == HIGH || spot == 3 && digitalRead(8) == HIGH || spot == 1 && digitalRead(8) == HIGH)
   {
     return(0);

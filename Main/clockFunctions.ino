@@ -12,7 +12,7 @@ void clockDateSetup(DS1307 ur, int y, int m, int d, int h, int mi, int s) // Par
   ur.setTime(); // Set the clock to the filled date
 }
 
-void clocking(DS1307 ur, rgb_lcd lcdobj, bool clearing) 
+void clocking(DS1307 ur, rgb_lcd lcdobj) 
 {
   ur.getTime(); // Get the time from RTC module
   lcd.setCursor(0,0);
@@ -54,8 +54,4 @@ void clocking(DS1307 ur, rgb_lcd lcdobj, bool clearing)
   lcdobj.setCursor(12,1); // Further on next line, day
   lcdobj.print(dayofweek[ur.dayOfWeek-1]);
   delay(100); // Add small delay for no flicking screen effect
-    if(clearing)
-  {
-   lcdobj.clear();  // Clears display 
-  }
 }
