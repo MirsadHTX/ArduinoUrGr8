@@ -2,7 +2,7 @@ int nav;
 int spot = 0;
 float x, y, z;
 
-void navsetup()
+void navSetup()
 {
   //create custom arrow
   byte pointer[8] = {
@@ -30,7 +30,7 @@ int navigation(){
   }  
   
   //detect if user wants to go back to the  main menu
-  else if(x > 0.7){
+  else if(x < -0.7){
     return 3;
   }
   else{

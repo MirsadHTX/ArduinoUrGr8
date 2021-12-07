@@ -16,7 +16,7 @@ void setup()
   lcd.begin(16,2);
   clockSetup(ur);
   counterSetup(8);
-  navsetup();
+  navSetup();
   lcd.clear();
 }
 
@@ -43,14 +43,14 @@ void loop()
   }
   else if(currentState == 1)
   {
-    Elev();
+    elev();
     runNav = false;
   }
   else{
     currentState = 3;
   }
   //returns to menu if accelerometors x axis is changed drastically
-  if(ToMenu() == true && currentState != 3){
+  if(toMenu() == true && currentState != 3){
     lcd.clear();
     runNav = true;
   }
